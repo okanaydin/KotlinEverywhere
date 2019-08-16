@@ -1,7 +1,8 @@
-package com.example.kotlineverywhere
+package com.example.kotlineverywhere.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.kotlineverywhere.R
 
 class MainActivity : AppCompatActivity() {
 

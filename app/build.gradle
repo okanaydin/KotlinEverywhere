@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -36,6 +40,10 @@ dependencies {
 
     // Recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta02'
+
+    // Refrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
 
     // Circle imageView
     implementation 'de.hdodenhof:circleimageview:3.0.0'

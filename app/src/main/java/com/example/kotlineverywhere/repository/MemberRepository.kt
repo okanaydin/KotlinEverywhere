@@ -4,5 +4,5 @@ import com.example.kotlineverywhere.remote.RetrofitInstance
 
 class MemberRepository {
 
-    fun getMemberList() = RetrofitInstance.service.getMemberList()
+    suspend fun getMemberList() = RetrofitInstance.service.getMemberList()
 }

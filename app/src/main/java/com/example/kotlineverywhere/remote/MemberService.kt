@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface MemberService {
 
     @GET("bins/n2w5b")
-    fun getMemberList(): Call<List<Member>>
+    suspend fun getMemberList(): List<Member>
 }

@@ -16,41 +16,29 @@ import kotlinx.android.synthetic.main.fragment_member_list.*
 
 class MemberListFragment : Fragment() {
 
+    private val memberListViewModel: MemberListViewModel by lazy {
+        ViewModelProviders.of(this@MemberListFragment)[MemberListViewModel::class.java]
+    }
+
     private val memberListAdapter = MemberListAdapter()
 
-    private lateinit var viewModel: MemberListViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_member_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(MemberListViewModel::class.java)
+        memberListViewModel.getMemberListLiveData.observe(viewLifecycleOwner, Observer {memberList->
+            memberListAdapter.submitList(memberList)
+        })
 
-        initMemberListRecyclerView()
-        initLiveData()
-        onItemClicked()
-
-        viewModel.getMemberList()
-    }
-
-    private fun initMemberListRecyclerView() {
         recyclerViewMemberList.apply {
             setHasFixedSize(true)
             adapter = memberListAdapter
         }
-    }
 
-    private fun initLiveData() {
-        viewModel.memberListLiveData.observe(this, Observer {
-            memberListAdapter.memberList = it
-        })
+        onItemClicked()
     }
 
     private fun onItemClicked() {

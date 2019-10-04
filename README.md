@@ -2,7 +2,8 @@
 Kotlin Everywhere is a global series of community-led events - supported by Google and JetBrains - where you can learn more about Kotlin, including using it in Android, Google Cloud Platform, and multi-platform development.
 This application created for Kotlin Everywhere series as a codelab. It will show step by step Kotlin and Android Jetpack Components fundamentals.
 
-<p align="center"> <img  src="http://pasteboard.co/IAqM7sh.png"></p>
+![Group 7](https://user-images.githubusercontent.com/11614563/66221853-84644900-e6d8-11e9-8010-21706c55013a.png)
+
 
 ## Codelab Requirements
  - Basic Android knowledge

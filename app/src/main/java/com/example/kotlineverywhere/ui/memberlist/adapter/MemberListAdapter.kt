@@ -1,18 +1,27 @@
 package com.example.kotlineverywhere.ui.memberlist.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlineverywhere.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.example.kotlineverywhere.model.Member
 
-class MemberListAdapter : RecyclerView.Adapter<MemberListViewHolder>() {
+class MemberListAdapter : ListAdapter<Member,MemberListViewHolder>(MemberDiffUtil) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberListViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_member, parent, false)
-        return MemberListViewHolder(itemView)
+    companion object MemberDiffUtil : DiffUtil.ItemCallback<Member>(){
+        override fun areItemsTheSame(oldItem: Member, newItem: Member): Boolean {
+            return oldItem.name == newItem.name
+        }
+
+        override fun areContentsTheSame(oldItem: Member, newItem: Member): Boolean {
+            return oldItem == newItem
+        }
     }
 
-    override fun getItemCount(): Int = 0
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberListViewHolder {
+        return MemberListViewHolder.getMemberListViewHolder(parent)
+    }
 
-    override fun onBindViewHolder(holder: MemberListViewHolder, position: Int) {}
+    override fun onBindViewHolder(holder: MemberListViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
 }

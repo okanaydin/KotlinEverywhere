@@ -1,31 +1,31 @@
 package com.example.kotlineverywhere.ui.memberlist.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlineverywhere.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.example.kotlineverywhere.model.Member
 
-class MemberListAdapter : RecyclerView.Adapter<MemberListViewHolder>() {
+class MemberListAdapter :  ListAdapter<Member, MemberListViewHolder>(MemberDiffUtil) {
 
-    var memberList: List<Member> = ArrayList()
-        set(value) {
-            field = value
-            this.notifyDataSetChanged()
+    companion object MemberDiffUtil : DiffUtil.ItemCallback<Member>(){
+        override fun areItemsTheSame(oldItem: Member, newItem: Member): Boolean {
+            return oldItem.name == newItem.name
         }
 
-    private var onItemClickListener: ((Member?) -> Unit)? = null
+        override fun areContentsTheSame(oldItem: Member, newItem: Member): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberListViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_member,parent,false)
-        return MemberListViewHolder(itemView)
+        return MemberListViewHolder.getMemberListViewHolder(parent)
     }
-
-    override fun getItemCount(): Int = memberList.size
 
     override fun onBindViewHolder(holder: MemberListViewHolder, position: Int) {
-        holder.bind(memberList[position], onItemClickListener)
+        holder.bind(getItem(position), onItemClickListener)
     }
+
+    private var onItemClickListener: ((Member?) -> Unit)? = null
 
     fun setOnItemClickListener(onItemClickListener: ((Member?) -> Unit)?) {
         this.onItemClickListener = onItemClickListener

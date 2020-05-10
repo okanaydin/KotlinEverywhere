@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    private const val BASE_URL = "https://api.myjson.com/"
+    private const val BASE_URL = "https://api.jsonbin.io/"
 
     var service: MemberService
 
